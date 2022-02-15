@@ -1,32 +1,35 @@
 package BE.boted.domain.crew.model.entity;
 
-import BE.boted.domain.CreatedUpdatedAtEntity;
-import BE.boted.domain.crewProject.model.entity.CrewProject;
-import BE.boted.domain.crewTask.model.entity.CrewTask;
-import BE.boted.domain.invite.model.entity.Invite;
+import BE.boted.domain.Period;
+import BE.boted.domain.invitation.model.entity.Invitation;
+import BE.boted.domain.crewtask.model.entity.CrewTask;
+import lombok.Getter;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Crew extends CreatedUpdatedAtEntity {
+@Getter
+public class Crew extends Period {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String nickname;
 
     private String email;
 
+    private String school;
+
     @OneToMany(mappedBy = "crew")
-    private List<CrewProject> crewProjects = new ArrayList<>();
+    private List<Invitation> invitations = new ArrayList<>();
 
     @OneToMany(mappedBy = "crew")
     private List<CrewTask> crewTasks = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "invite")
-    private Invite invite;
+
+
 }
