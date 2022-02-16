@@ -3,7 +3,9 @@ package BE.boted.domain.crew.model.entity;
 import BE.boted.domain.Period;
 import BE.boted.domain.invitation.model.entity.Invitation;
 import BE.boted.domain.crewtask.model.entity.CrewTask;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Crew extends Period {
 
     @Id
@@ -30,6 +33,15 @@ public class Crew extends Period {
     @OneToMany(mappedBy = "crew")
     private List<CrewTask> crewTasks = new ArrayList<>();
 
+    public Crew(String nickname, String email, String school) {
+        this.nickname = nickname;
+        this.email = email;
+        this.school = school;
+    }
 
-
+    public void change(String nickname, String email, String school) {
+        this.nickname = nickname;
+        this.email = email;
+        this.school = school;
+    }
 }
