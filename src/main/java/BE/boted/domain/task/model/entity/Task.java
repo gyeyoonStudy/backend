@@ -36,5 +36,9 @@ public class Task extends Period {
     @OneToMany(mappedBy = "task")
     private List<CrewTask> crewTasks = new ArrayList<>();
 
+    public void changeStatus(TaskStatus status) {
+        this.status = status;
+    }
+
 
 }

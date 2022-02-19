@@ -1,4 +1,4 @@
-package BE.boted.application.crew.dto;
+package BE.boted.application.crew.dto.request;
 
 import lombok.Data;
 

@@ -5,11 +5,13 @@ import BE.boted.domain.Period;
 import BE.boted.domain.crew.model.entity.Crew;
 import BE.boted.domain.project.model.entity.Project;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Invitation extends Period {
 
     @Id
@@ -27,4 +29,47 @@ public class Invitation extends Period {
     @JoinColumn(name = "project_id")
     private Project project;
 
+    public Invitation(Crew crew, Project project) {
+
+        //setCrew
+        this.crew = crew;
+        crew.getInvitations().add(this);
+
+        //setProject
+        this.project = project;
+        project.getInvitations().add(this);
+
+        //setBasic
+        this.status = InvitationStatus.WAIT;
+    }
+
+//    public void setCrew(Crew crew) {
+//        this.crew = crew;
+//        crew.getInvitations().add(this);
+//    }
+//
+//    public void setProject(Project project) {
+//        this.project = project;
+//        project.getInvitations().add(this);
+//    }
+//
+//    public void setBasic() {
+//        this.status = InvitationStatus.WAIT;
+//    }
+
+    public Long accept(){
+        this.crew.getInvitations().remove(this);
+        this.project.getInvitations().remove(this);
+        return project.getId();
+    }
+
+//    public Long refuse() {
+//        this.status = InvitationStatus.REFUSE;
+//        return this.id;
+//    }
+
+    public void refuse() {
+        this.crew.getInvitations().remove(this);
+        this.project.getInvitations().remove(this);
+    }
 }

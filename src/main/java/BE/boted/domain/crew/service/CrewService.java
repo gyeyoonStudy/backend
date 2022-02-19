@@ -1,9 +1,10 @@
 package BE.boted.domain.crew.service;
 
-import BE.boted.application.crew.dto.CrewRequest;
+import BE.boted.application.crew.dto.request.CrewRequest;
 import BE.boted.domain.crew.exception.CrewNotExistException;
 import BE.boted.domain.crew.exception.NickNameAlreadyExistException;
-import BE.boted.domain.crew.model.dto.CrewResponse;
+import BE.boted.domain.crew.model.dto.response.CrewInfoDto;
+import BE.boted.domain.crew.model.dto.response.CrewResponse;
 import BE.boted.domain.crew.model.entity.Crew;
 import BE.boted.domain.crew.model.repository.CrewRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +32,11 @@ public class CrewService {
 
     }
 
-    public CrewResponse getProfile(Long crewId) {
+    public CrewInfoDto getProfile(Long crewId) {
         Crew crew = crewRepository.findById(crewId)
                 .orElseThrow(() -> new CrewNotExistException("존재하지 않는 회원입니다."));
 
-        return new CrewResponse(crew);
+        return new CrewInfoDto(crew);
     }
 
     @Transactional

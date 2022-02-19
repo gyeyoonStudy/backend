@@ -3,6 +3,7 @@ package BE.boted.domain.crew.model.entity;
 import BE.boted.domain.Period;
 import BE.boted.domain.invitation.model.entity.Invitation;
 import BE.boted.domain.crewtask.model.entity.CrewTask;
+import BE.boted.domain.participation.model.entity.Participation;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,9 @@ public class Crew extends Period {
 
     @OneToMany(mappedBy = "crew")
     private List<CrewTask> crewTasks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "crew")
+    private List<Participation> participations = new ArrayList<>();
 
     public Crew(String nickname, String email, String school) {
         this.nickname = nickname;
