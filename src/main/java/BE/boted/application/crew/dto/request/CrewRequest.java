@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class CrewRequest {
 
     @NotEmpty(message = "닉네임은 반드시 존재해야합니다")
-    @Size(max = 100)
+    @Size(max = 15)
     private String nickname;
     private String email;
     private String school;
